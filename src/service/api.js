@@ -17,6 +17,9 @@ export default {
   getUserDetail: params => post('/user/getUserDetail', params),
   userUpdate: params => post('/user/update', params),
   updatePassword: params => post('/user/updatePassword', params),
+  getUserPageList: params => post('/user/getUserPageList', params),
+
+
 
   getCertType: params => post('/selector/getCertType', params),
   getRace: params => post('/selector/getRace', params),
@@ -31,6 +34,7 @@ export default {
   getServerType: params => post('/selector/getServerType', params),
   getServerMark: params => post('/selector/getServerMark', params),
   getServerStatus: params => post('/selector/getServerStatus', params),
+  getUserStatus: params => post('/selector/getUserStatus', params),
 
   getWhiteList: params => post('/white/list', params),
   addWhiteList: params => post('/white/add', params),

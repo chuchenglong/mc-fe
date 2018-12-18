@@ -11,6 +11,7 @@ import Whitelist from '@/views/system/whitelist'
 import Config from '@/views/system/config'
 import Server from '@/views/system/server'
 import Log from '@/views/system/log'
+import UserPageList from '@/views/system/user'
 import Word from '@/views/demo/word'
 
 Vue.use(Router)
@@ -46,7 +47,9 @@ export default new Router({
         {path: '/home/system/config', name: '配置管理', component: Config, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/server', name: '服务管理', component: Server, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/log', name: '服务管理', component: Log, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/system/user', name: '用户管理', component: UserPageList, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/demo/word', name: 'word上传', component: Word, menuShow: true, meta:{requireAuth: true }},
+
       ]
     }
   ]

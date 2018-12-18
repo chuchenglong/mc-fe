@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 const post = (uri, params) => {
-  const u = 'http://localhost:8001' + uri
+  const u = '/api' + uri
   const p = Vue.prototype.$http.handleParams(params)
   return Vue.prototype.$http.post(u, p)
 }

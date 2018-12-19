@@ -35,6 +35,7 @@ export default {
   getServerMark: params => post('/selector/getServerMark', params),
   getServerStatus: params => post('/selector/getServerStatus', params),
   getUserStatus: params => post('/selector/getUserStatus', params),
+  getOptStatus: params => post('/selector/getOptStatus', params),
 
   getWhiteList: params => post('/white/list', params),
   addWhiteList: params => post('/white/add', params),

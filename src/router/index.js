@@ -12,6 +12,7 @@ import Config from '@/views/system/config'
 import Server from '@/views/system/server'
 import Log from '@/views/system/log'
 import UserPageList from '@/views/system/user'
+import Role from '@/views/system/role'
 import Word from '@/views/demo/word'
 
 Vue.use(Router)
@@ -48,6 +49,7 @@ export default new Router({
         {path: '/home/system/server', name: '服务管理', component: Server, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/log', name: '服务管理', component: Log, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/user', name: '用户管理', component: UserPageList, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/system/role', name: '角色管理', component: Role, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/demo/word', name: 'word上传', component: Word, menuShow: true, meta:{requireAuth: true }},
 
       ]

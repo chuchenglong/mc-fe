@@ -1,25 +1,55 @@
 <template>
   <div>
     <el-container>
-      <el-table :data="tableData.filter(data => !search || data.whiteValue.toLowerCase().includes(search.toLowerCase()))" >
-        <el-table-column width	="180px" label="白名单类型" prop="whiteType" :formatter="ftWhiteType"></el-table-column>
-        <el-table-column min-width	="350px" label="白名单内容" prop="whiteValue"></el-table-column>
-        <el-table-column width	="400px" align="right">
-          <template slot="header" slot-scope="scope">
-            <div><el-button icon="el-icon-plus" size="small" @click="handleAdd" class="b-add">添加白名单</el-button></div>
-            <el-input v-model="search" size="small " placeholder="输入白名单内容搜索" prefix-icon="el-icon-search"/>
-          </template>
-          <template slot-scope="scope">
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <el-tabs  @tab-click="handleClick" v-model="activeName">
+        <el-tab-pane name="wt_100">
+          <span slot="label">
+            <el-tooltip class="item" effect="dark" content="服务白名单：用于免除该服务需要的token验证，也就是可以无用户享受服务。" placement="bottom-end">
+              <i class="el-icon-info"></i>
+            </el-tooltip>
+            服务白名单
+          </span>
+          <el-table :data="tableData.filter(data => !search || data.whiteValue.toLowerCase().includes(search.toLowerCase()))" >
+            <el-table-column min-width	="350px" label="服务白名单内容" prop="whiteValue"></el-table-column>
+            <el-table-column width	="400px" align="right">
+              <template slot="header" slot-scope="scope">
+                <div><el-button icon="el-icon-plus" size="small" @click="handleAdd('wt_100')" class="b-add">添加白名单</el-button></div>
+                <el-input v-model="search" size="small " placeholder="输入白名单内容搜索" prefix-icon="el-icon-search"/>
+              </template>
+              <template slot-scope="scope">
+                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane name="wt_101">
+          <span slot="label">
+            <el-tooltip class="item" effect="dark" content="用户白名单：该用户可以享受最高权限的服务。" placement="bottom-end">
+              <i class="el-icon-info"></i>
+            </el-tooltip>
+            用户白名单
+          </span>
+          <el-table :data="tableData.filter(data => !search || data.whiteValue.toLowerCase().includes(search.toLowerCase()))" >
+            <el-table-column min-width	="350px" label="用户白名单内容" prop="whiteValue"></el-table-column>
+            <el-table-column width	="400px" align="right">
+              <template slot="header" slot-scope="scope">
+                <div><el-button icon="el-icon-plus" size="small" @click="handleAdd('wt_101')" class="b-add">添加白名单</el-button></div>
+                <el-input v-model="search" size="small " placeholder="输入白名单内容搜索" prefix-icon="el-icon-search"/>
+              </template>
+              <template slot-scope="scope">
+                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>
+
     </el-container>
     <el-container>
       <el-dialog title="新增白名单" :close-on-click-modal="false" :visible.sync="addVisible">
         <el-form>
           <el-form-item label="白名单类型">
-            <el-radio-group v-model="whiteType">
+            <el-radio-group v-model="whiteType" disabled>
               <el-radio v-for="w in whiteTypes" :key="w.key" :label="w.key">{{w.value}}</el-radio>
             </el-radio-group>
           </el-form-item>
@@ -39,12 +69,9 @@
 
   export default {
     mounted() {
-      api.getWhiteList().then((response) => {
-        if (response.code == 'success')
-          this.tableData = response.data
-        else
-          this.$message.error(response.message)
-      })
+      this.activeName = 'wt_100'
+      this.whiteType = 'wt_100'
+      this.getWhiteList()
       api.getWhiteType().then((response) => {
         if (response.code == 'success') {
           this.whiteTypes = response.data
@@ -60,7 +87,8 @@
         addVisible: false,
         whiteValue: '',
         whiteType: '',
-        whiteTypes: []
+        whiteTypes: [],
+        activeName: ''
       }
     },
     methods: {
@@ -81,8 +109,9 @@
           this.$message({type: 'info', message: '已取消删除'})
         })
       },
-      handleAdd() {
+      handleAdd(whiteType) {
         this.addVisible = true
+        this.whiteType = whiteType;
       },
       addWhiteList() {
         var params = {};
@@ -104,12 +133,24 @@
         this.whiteType = ''
         this.whiteValue = ''
       },
-      ftWhiteType(row, column, cellValue, index) {
-        if (cellValue == 'wt_100')
-          return '服务白名单'
-        else
-          return '用户白名单'
+      handleClick(tab, event) {
+        // console.log(tab.$options.propsData.name, event);
+        this.whiteType = tab.$options.propsData.name;
+        this.getWhiteList()
+
+      },
+      getWhiteList() {
+        var params = {}
+        params.whiteType = this.whiteType
+        api.getWhiteList(params).then((response) => {
+          if (response.code == 'success')
+            this.tableData = response.data
+          else
+            this.$message.error(response.message)
+        })
       }
+
+
 
     }
 
@@ -128,6 +169,9 @@
   .b-add {
     width: 110px !important;
     border-radius: 6px;
+  }
+  .el-tabs {
+    width: 100%;
   }
 
 

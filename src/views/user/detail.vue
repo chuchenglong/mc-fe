@@ -6,8 +6,10 @@
           <template slot="title">
             <label class="el-label t">基本信息</label>
           </template>
-          <img :src="userDetail.photo" v-if="userDetail.photo" class="img-user"/>
-          <img src="@/assets/user-photo.png" v-else class="img-user"/>
+          <div style="position: absolute;margin-top: 8px;">
+            <img :src="userDetail.photo" v-if="userDetail.photo" class="img-user"/>
+            <img src="@/assets/user-photo.png" v-else class="img-user"/>
+          </div>
           <el-form class="el-form-p">
             <el-form-item>
               <label class="el-label l">用户名：</label>
@@ -149,8 +151,8 @@
     border-bottom: none;
   }
   .el-form-p {
-    float: right;
-    /*margin-left: 2%;*/
+    /*float: right;*/
+    margin-left: 230px;
     width: 600px;
   }
   .el-form-item {

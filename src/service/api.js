@@ -19,7 +19,9 @@ export default {
   updatePassword: params => post('/user/updatePassword', params),
   getUserPageList: params => post('/user/getUserPageList', params),
 
-
+  getAccountOutsidePageList: params => post('/account/outside/list', params),
+  addAccountOutside: params => post('/account/outside/add', params),
+  deleteAccountOutside: params => post('/account/outside/delete', params),
 
   getCertType: params => post('/selector/getCertType', params),
   getRace: params => post('/selector/getRace', params),
@@ -36,6 +38,8 @@ export default {
   getServerStatus: params => post('/selector/getServerStatus', params),
   getUserStatus: params => post('/selector/getUserStatus', params),
   getOptStatus: params => post('/selector/getOptStatus', params),
+  getAccountType: params => post('/selector/getAccountType', params),
+  getAccountMark: params => post('/selector/getAccountMark', params),
 
   getWhiteList: params => post('/white/list', params),
   addWhiteList: params => post('/white/add', params),

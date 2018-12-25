@@ -14,6 +14,9 @@ import Log from '@/views/system/log'
 import UserPageList from '@/views/system/user'
 import Role from '@/views/system/role'
 import Word from '@/views/demo/word'
+import Vuex from '@/views/demo/vuex'
+import MyAccount from '@/views/myplace/account'
+
 
 Vue.use(Router)
 
@@ -50,8 +53,9 @@ export default new Router({
         {path: '/home/system/log', name: '服务管理', component: Log, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/user', name: '用户管理', component: UserPageList, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/role', name: '角色管理', component: Role, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/myplace/account', name: '我的账户管理', component: MyAccount, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/demo/word', name: 'word上传', component: Word, menuShow: true, meta:{requireAuth: true }},
-
+        {path: '/home/demo/vuex', name: 'vuex', component: Vuex, menuShow: true, meta:{requireAuth: true }},
       ]
     }
   ]

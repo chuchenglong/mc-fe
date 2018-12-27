@@ -1,5 +1,19 @@
-export function ftCertType(value) {
+import {formatDate} from '@/util/date'
 
+export function ftDate(value, format) {
+  if (value == null || value == '') {
+    return ''
+  }
+  return formatDate(value, format)
+}
+
+export function ftCertType(value) {
+  if (value == 'cert_100') {
+    return '身份证'
+  } else if (value == 'cert_101') {
+    return '护照'
+  }
+  return value
 }
 
 export function ftRace(value) {
@@ -60,10 +74,25 @@ export function ftOptStatus(value) {
 }
 
 export function ftAccountType(value) {
-
+  if (value == 'at_100') {
+    return '游戏'
+  } else if (value == 'at_101') {
+    return '工作'
+  }
+  return value
 }
 
 export function ftAccountMark(value) {
+  if (value == 'am_100') {
+    return '--'
+  }
+  return value
+}
 
+export function ftRelAccountId(value) {
+  if (value == null || value == '') {
+    return '否'
+  }
+  return '是'
 }
 

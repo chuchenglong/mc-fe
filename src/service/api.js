@@ -23,6 +23,17 @@ export default {
   addAccountOutside: params => post('/account/outside/add', params),
   deleteAccountOutside: params => post('/account/outside/delete', params),
 
+  getCompanyList: params => post('/company/getCompanyList', params),
+  addCompany: params => post('/company/add', params),
+  updateCompany: params => post('/company/update', params),
+  deleteCompany: params => post('/company/delete', params),
+
+  getProductList: params => post('/product/getProductList', params),
+  addProduct: params => post('/product/add', params),
+  updateProduct: params => post('/product/update', params),
+  deleteProduct: params => post('/product/delete', params),
+  getProductListByCompany: params => post('/product/getProductListByCompanyId', params),
+
   getCertType: params => post('/selector/getCertType', params),
   getRace: params => post('/selector/getRace', params),
   getNationality: params => post('/selector/getNationality', params),

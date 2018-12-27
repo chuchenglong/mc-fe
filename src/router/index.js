@@ -15,7 +15,13 @@ import UserPageList from '@/views/system/user'
 import Role from '@/views/system/role'
 import Word from '@/views/demo/word'
 import Vuex from '@/views/demo/vuex'
-import MyAccount from '@/views/myplace/account'
+import AccountIndex from '@/views/myplace/account/index'
+import AccountOutsideList from '@/views/myplace/account/outside/list'
+import AccountOutsideAdd from '@/views/myplace/account/outside/add'
+import AccountCompanyList from '@/views/myplace/account/company/list'
+import AccountCompanyAdd from '@/views/myplace/account/company/add'
+import AccountProductList from '@/views/myplace/account/product/list'
+import AccountProductAdd from '@/views/myplace/account/product/add'
 
 
 Vue.use(Router)
@@ -53,7 +59,15 @@ export default new Router({
         {path: '/home/system/log', name: '服务管理', component: Log, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/user', name: '用户管理', component: UserPageList, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/system/role', name: '角色管理', component: Role, menuShow: true, meta:{requireAuth: true }},
-        {path: '/home/myplace/account', name: '我的账户管理', component: MyAccount, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/myplace/account', name: '三方账号管理', component: AccountIndex, redirect: '/home/myplace/account/outside/list', menuShow: true, meta:{requireAuth: true },
+          children: [
+            {path: '/home/myplace/account/outside/list', name: '三方账号查询', component: AccountOutsideList, menuShow: true, meta:{requireAuth: true }},
+            {path: '/home/myplace/account/outside/add', name: '三方账号新增', component: AccountOutsideAdd, menuShow: true, meta:{requireAuth: true }},
+            {path: '/home/myplace/account/company/list', name: '公司列表', component: AccountCompanyList, menuShow: true, meta:{requireAuth: true }},
+            {path: '/home/myplace/account/company/add', name: '添加公司', component: AccountCompanyAdd, menuShow: true, meta:{requireAuth: true }},
+            {path: '/home/myplace/account/product/list', name: '产品列表', component: AccountProductList, menuShow: true, meta:{requireAuth: true }},
+            {path: '/home/myplace/account/product/add', name: '添加产品', component: AccountProductAdd, menuShow: true, meta:{requireAuth: true }},
+          ]},
         {path: '/home/demo/word', name: 'word上传', component: Word, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/demo/vuex', name: 'vuex', component: Vuex, menuShow: true, meta:{requireAuth: true }},
       ]

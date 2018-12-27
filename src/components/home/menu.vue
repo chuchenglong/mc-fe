@@ -5,7 +5,7 @@
 
       <el-submenu index="/home/myplace">
         <template slot="title"><span>我的工作台</span></template>
-        <el-menu-item index="/home/myplace/account"><span>我的账户管理</span></el-menu-item>
+        <el-menu-item index="/home/myplace/account"><span>三方账号管理</span></el-menu-item>
         <el-menu-item index="2-2"><span>我的请假管理</span></el-menu-item>
         <el-menu-item index="2-3"><span>我的加班管理</span></el-menu-item>
         <el-submenu index="2-4">

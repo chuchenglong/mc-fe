@@ -25,14 +25,6 @@
   import {formatDate} from '@/util/date'
 
   export default {
-    activated() {
-      api.getProductList().then((response) => {
-        if (response.code == 'success') {
-          this.tableData = response.data
-        } else
-          this.$message.error(response.message)
-      })
-    },
     data() {
       return {
         tableData: [],
@@ -40,6 +32,14 @@
         productName: '',
         productDes: '',
       }
+    },
+    activated() {
+      api.getProductList().then((response) => {
+        if (response.code == 'success') {
+          this.tableData = response.data
+        } else
+          this.$message.error(response.message)
+      })
     },
     methods: {
       handleUpdate(index, row) {
@@ -80,8 +80,6 @@
           this.$message({type: 'info', message: '已取消删除'})
         })
       }
-
-
     }
 
   }

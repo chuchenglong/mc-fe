@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
           <template slot="title">
             <label class="el-label t">基本信息</label>
@@ -94,7 +94,7 @@
 
 <script>
   import api from '@/service/api'
-  import {formatDate} from '@/util/date'
+  import {ftDate} from '@/util/format'
 
   export default {
     data() {
@@ -113,22 +113,10 @@
     },
     computed: {
       fmCreateTime() {
-        if (this.userDetail.createTime == null || this.userDetail.createTime == '')
-          return ''
-        return this.fmDate(this.userDetail.createTime, 'yyyy-MM-dd hh:mm:ss')
+        return ftDate(new Date(this.userDetail.createTime), 'yyyy-MM-dd hh:mm:ss')
       },
       fmBirthDate() {
-        if (this.userDetail.birthDate == null || this.userDetail.birthDate == '')
-          return ''
-        return this.fmDate(this.userDetail.birthDate, 'yyyy-MM-dd')
-      }
-    },
-    methods: {
-      handleChange(val) {
-        // console.log(val);
-      },
-      fmDate(time, fm) {
-        return formatDate(new Date(time), fm)
+        return ftDate(new Date(this.userDetail.birthDate), 'yyyy-MM-dd')
       }
     }
   }
@@ -146,7 +134,7 @@
     margin-top: 1.5%;
   }
   .el-collapse {
-    padding: 1% 18% 0 18%;
+    padding: 1% 15% 0 15%;
     width: 100%;
     border-bottom: none;
   }

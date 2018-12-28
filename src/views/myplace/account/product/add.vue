@@ -35,6 +35,14 @@
   import api from '@/service/api'
 
   export default {
+    data() {
+      return {
+        companyId: '',
+        productName: '',
+        productDes: '',
+        companys: []
+      }
+    },
     activated() {
       api.getCompanyList().then((response) => {
         if (response.code == 'success') {
@@ -43,14 +51,6 @@
           this.$message.error(response.message)
         }
       })
-    },
-    data() {
-      return {
-        companyId: '',
-        productName: '',
-        productDes: '',
-        companys: []
-      }
     },
     methods: {
       addProduct() {

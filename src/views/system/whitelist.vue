@@ -14,7 +14,7 @@
             <el-table-column width	="400px" align="right">
               <template slot="header" slot-scope="scope">
                 <div><el-button icon="el-icon-plus" size="small" @click="handleAdd('wt_100')" class="b-add">添加白名单</el-button></div>
-                <el-input v-model="search" size="small " placeholder="输入白名单内容搜索" prefix-icon="el-icon-search"/>
+                <el-input v-model="search" size="small " placeholder="输入服务白名单内容搜索" prefix-icon="el-icon-search"/>
               </template>
               <template slot-scope="scope">
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">删除</el-button>
@@ -34,7 +34,7 @@
             <el-table-column width	="400px" align="right">
               <template slot="header" slot-scope="scope">
                 <div><el-button icon="el-icon-plus" size="small" @click="handleAdd('wt_101')" class="b-add">添加白名单</el-button></div>
-                <el-input v-model="search" size="small " placeholder="输入白名单内容搜索" prefix-icon="el-icon-search"/>
+                <el-input v-model="search" size="small " placeholder="输入用户白名单内容搜索" prefix-icon="el-icon-search"/>
               </template>
               <template slot-scope="scope">
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">删除</el-button>
@@ -43,8 +43,8 @@
           </el-table>
         </el-tab-pane>
       </el-tabs>
-
     </el-container>
+
     <el-container>
       <el-dialog title="新增白名单" :close-on-click-modal="false" :visible.sync="addVisible">
         <el-form>
@@ -68,6 +68,17 @@
   import api from '@/service/api'
 
   export default {
+    data() {
+      return {
+        tableData: [],
+        search: '',
+        addVisible: false,
+        whiteValue: '',
+        whiteType: '',
+        whiteTypes: [],
+        activeName: ''
+      }
+    },
     mounted() {
       this.activeName = 'wt_100'
       this.whiteType = 'wt_100'
@@ -79,17 +90,6 @@
           this.$message.error(response.message)
         }
       })
-    },
-    data() {
-      return {
-        tableData: [],
-        search: '',
-        addVisible: false,
-        whiteValue: '',
-        whiteType: '',
-        whiteTypes: [],
-        activeName: ''
-      }
     },
     methods: {
       handleDelete(index, row) {
@@ -134,10 +134,8 @@
         this.whiteValue = ''
       },
       handleClick(tab, event) {
-        // console.log(tab.$options.propsData.name, event);
         this.whiteType = tab.$options.propsData.name;
         this.getWhiteList()
-
       },
       getWhiteList() {
         var params = {}
@@ -149,9 +147,6 @@
             this.$message.error(response.message)
         })
       }
-
-
-
     }
 
   }
@@ -159,7 +154,7 @@
 
 <style scoped>
   .el-container {
-    padding: 1% 10% 0 10% !important;
+    padding: 3px 3% 0 3% !important;
     width: 100%;
   }
   .el-input {
@@ -173,6 +168,5 @@
   .el-tabs {
     width: 100%;
   }
-
 
 </style>

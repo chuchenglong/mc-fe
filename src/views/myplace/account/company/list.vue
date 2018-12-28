@@ -23,14 +23,6 @@
   import {formatDate} from '@/util/date'
 
   export default {
-    activated() {
-      api.getCompanyList().then((response) => {
-        if (response.code == 'success') {
-          this.tableData = response.data
-        } else
-          this.$message.error(response.message)
-      })
-    },
     data() {
       return {
         tableData: [],
@@ -38,6 +30,14 @@
         companyName: '',
         companyDes: '',
       }
+    },
+    activated() {
+      api.getCompanyList().then((response) => {
+        if (response.code == 'success') {
+          this.tableData = response.data
+        } else
+          this.$message.error(response.message)
+      })
     },
     methods: {
       handleUpdate(index, row) {

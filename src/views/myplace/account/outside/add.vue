@@ -110,6 +110,36 @@
   import api from '@/service/api'
 
   export default {
+    data() {
+      return {
+        accountNo: '',
+        loginPassword: '',
+        queryPassword: '',
+        transferPassword: '',
+        accountType: '',
+        accountMark: '',
+        product: '',
+        company: '',
+        certType: '',
+        certNo: '',
+        name: '',
+        phone: '',
+        email: '',
+        question1: '',
+        answer1: '',
+        question2: '',
+        answer2: '',
+        question3: '',
+        answer3: '',
+        accountUsed: '',
+        accountDes: '',
+        accountTypes: [],
+        accountMarks: [],
+        certTypes: [],
+        companys: [],
+        products: [],
+      }
+    },
     activated() {
       api.getAccountType().then((response) => {
         if (response.code == 'success') {
@@ -143,36 +173,6 @@
         }
       })
 
-    },
-    data() {
-      return {
-        accountNo: '',
-        loginPassword: '',
-        queryPassword: '',
-        transferPassword: '',
-        accountType: '',
-        accountMark: '',
-        product: '',
-        company: '',
-        certType: '',
-        certNo: '',
-        name: '',
-        phone: '',
-        email: '',
-        question1: '',
-        answer1: '',
-        question2: '',
-        answer2: '',
-        question3: '',
-        answer3: '',
-        accountUsed: '',
-        accountDes: '',
-        accountTypes: [],
-        accountMarks: [],
-        certTypes: [],
-        companys: [],
-        products: [],
-      }
     },
     methods: {
       onSelectedCompany(value) {

@@ -20,16 +20,20 @@
     </el-container>
     <el-container>
       <el-table :data="tableData.filter(data => !search || data.phone.toLowerCase().includes(search.toLowerCase()))" >
-        <el-table-column min-width	="150px" label="用户名" prop="username" :formatter="ftUserId"></el-table-column>
-        <el-table-column min-width	="150px" label="手机号" prop="phone"></el-table-column>
-        <el-table-column min-width	="150px" label="状态" prop="userStatus" :formatter="ftOptStatus"></el-table-column>
-        <el-table-column min-width	="150px" label="注册时间" prop="createTime" :formatter="ftOptTime"></el-table-column>
-        <el-table-column width	="400px" align="right">
+        <el-table-column width	="150px" label="用户名" prop="username" :formatter="ftUserId"></el-table-column>
+        <el-table-column width	="120px" label="手机号" prop="phone"></el-table-column>
+        <el-table-column width	="80px" label="状态" prop="userStatus" :formatter="ftOptStatus"></el-table-column>
+        <el-table-column width	="160px" label="注册时间" prop="createTime" :formatter="ftOptTime"></el-table-column>
+        <el-table-column min-width	="400px" align="right">
           <template slot="header" slot-scope="scope">
             <el-input v-model="search" size="small " placeholder="输入手机号在当前页面搜索" prefix-icon="el-icon-search"/>
           </template>
           <template slot-scope="scope">
-            <el-button size="mini" type="danger" @click="handleDetail(scope.$index, scope.row)" icon="el-icon-document">详情</el-button>
+            <el-button size="mini" type="info" @click="handleDetail(scope.$index, scope.row)" icon="el-icon-document">详情</el-button>
+            <el-button size="mini" type="primary" @click="handleDetail(scope.$index, scope.row)" icon="el-icon-edit">编辑</el-button>
+            <el-button size="mini" type="primary" @click="handleDetail(scope.$index, scope.row)" icon="el-icon-close">冻结</el-button>
+            <el-button size="mini" type="primary" @click="handleDetail(scope.$index, scope.row)" icon="el-icon-check">解锁</el-button>
+            <el-button size="mini" type="danger" @click="handleDetail(scope.$index, scope.row)" icon="el-icon-delete">注销</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -50,22 +54,9 @@
 
 <script>
   import api from '@/service/api'
-  import {formatDate} from '@/util/date'
+  import {ftDate, ftUserStatus, ftNumber} from '@/util/format'
 
   export default {
-    mounted() {
-      this.pageSize = 10
-      this.getUserPageList()
-
-      api.getUserStatus().then((response) => {
-        if (response.code == 'success') {
-          this.userStatuses = response.data
-        } else {
-          this.$message.error(response.message)
-        }
-      })
-
-    },
     data() {
       return {
         tableData: [],
@@ -80,31 +71,26 @@
         phone: ''
       }
     },
+    activated() {
+      this.pageSize = 10
+      this.getUserPageList()
+      api.getUserStatus().then((response) => {
+        if (response.code == 'success') {
+          this.userStatuses = response.data
+        } else {
+          this.$message.error(response.message)
+        }
+      })
+    },
     methods: {
       ftOptStatus(row, column, cellValue, index) {
-        if (cellValue == 'us_100') {
-          return '正常'
-        } else if (cellValue == 'us_101') {
-          return '锁定'
-        } else if (cellValue == 'us_102') {
-          return '冻结'
-        } else if (cellValue == 'us_103') {
-          return '休眠'
-        } else {
-          return ''
-        }
+        return ftUserStatus(cellValue)
       },
       ftOptTime(row, column, cellValue, index) {
-        if (cellValue == null || cellValue == '') {
-          return ''
-        }
-        return formatDate(new Date(cellValue), 'yyyy-MM-dd hh:mm:ss')
+        return ftDate(new Date(cellValue), 'yyyy-MM-dd hh:mm:ss')
       },
       ftUserId(row, column, cellValue, index) {
-        if (cellValue == 0) {
-          return ''
-        }
-        return cellValue
+        return ftNumber(cellValue)
       },
       handleSizeChange: function (size) {
         this.pageSize = size
@@ -130,17 +116,15 @@
         })
       },
       handleDetail(index, row) {
-        this.$message.info("还没做了，急什么")
+        this.$message.info("淡定，还没做了，慢慢来！")
       }
-
     }
-
   }
 </script>
 
 <style scoped>
   .el-container {
-    padding: 1% 10% 0 10% !important;
+    padding: 1% 5% 0 5% !important;
     width: 100%;
   }
   .el-table {
@@ -172,5 +156,4 @@
   .query {
     margin-left: 25px;
   }
-
 </style>

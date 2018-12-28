@@ -5,23 +5,23 @@
         <el-form-item>
           <label class="el-label l">公司：</label>
           <label class="el-label r">
-            <el-select v-model="company" placeholder="请选择公司" @change="onSelectedCompany">
+            <el-select v-model="queryCompany" placeholder="请选择公司" @change="onSelectedCompany">
               <el-option key="" value="" label="全部"></el-option>
               <el-option v-for="c in companys" :key="c.id" :value="c.id" :label="c.companyName"></el-option>
             </el-select>
           </label>
           <label class="el-label l">产品：</label>
           <label class="el-label r">
-            <el-select v-model="product" placeholder="请选择公司" >
+            <el-select v-model="queryProduct" placeholder="请选择公司" >
               <el-option key="" value="" label="全部"></el-option>
               <el-option v-for="p in products" :key="p.id" :value="p.id" :label="p.productName"></el-option>
             </el-select>
           </label>
           <label class="el-label l">账号：</label>
-          <label class="el-label r"><el-input class="w" v-model="accountNo"/></label>
+          <label class="el-label r"><el-input class="w" v-model="queryAccountNo"/></label>
           <label class="el-label l">类型：</label>
           <label class="el-label r">
-            <el-select v-model="accountType" placeholder="请选择状态">
+            <el-select v-model="queryAccountType" placeholder="请选择状态">
               <el-option key="" value="" label="全部"></el-option>
               <el-option v-for="at in accountTypes" :key="at.key" :value="at.key" :label="at.value"></el-option>
             </el-select>
@@ -133,6 +133,26 @@
   import {ftAccountType, ftAccountMark, ftRelAccountId, ftDate, ftCertType} from '@/util/format'
 
   export default {
+    data() {
+      return {
+        tableData: [],
+        search: '',
+        pageArr: [5,10],
+        pageSize: 0,
+        pageNo: 1,
+        total: 0,
+        detailVisible: false,
+        accountTypes: [],
+        accountMarks: [],
+        companys: [],
+        products: [],
+        accountDetail: {},
+        queryCompany: '',
+        queryProduct: '',
+        queryAccountNo: '',
+        queryAccountType: ''
+      }
+    },
     activated() {
       this.pageSize = 10
       this.getAccountOutsidePageList()
@@ -172,22 +192,6 @@
         return ftAccountMark(this.accountDetail.accountMark)
       }
     },
-    data() {
-      return {
-        tableData: [],
-        search: '',
-        pageArr: [5,10],
-        pageSize: 0,
-        pageNo: 1,
-        total: 0,
-        detailVisible: false,
-        accountTypes: [],
-        accountMarks: [],
-        companys: [],
-        products: [],
-        accountDetail: {}
-      }
-    },
     methods: {
       handleSizeChange: function (size) {
         this.pageSize = size
@@ -201,10 +205,10 @@
         var params = {}
         params.pageSize = this.pageSize;
         params.pageNo = this.pageNo;
-        params.product = this.product;
-        params.company = this.company;
-        params.accountType = this.accountType;
-        params.accountNo = this.accountNo;
+        params.product = this.queryProduct;
+        params.company = this.queryCompany;
+        params.accountType = this.queryAccountType;
+        params.accountNo = this.queryAccountNo;
         api.getAccountOutsidePageList(params).then((response) => {
           if (response.code == 'success') {
             this.tableData = response.data.rows
@@ -232,6 +236,9 @@
       handleDetail(index, row) {
         this.detailVisible = true
         this.accountDetail = row
+      },
+      handleUpdate() {
+        this.$message.info("字段这么多，哥还在想要不要跳转页面，不急！")
       },
       cancel() {
         this.detailVisible = false

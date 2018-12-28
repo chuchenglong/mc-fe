@@ -35,6 +35,11 @@
         isShow: true
       }
     },
+    activated() {
+      this.isShow = true
+      this.password = ''
+      this.password2 = ''
+    },
     methods: {
       onSubmit() {
         let Base64 = require('js-base64').Base64;
@@ -52,11 +57,6 @@
       toUserDetail() {
         this.$router.push({path: "/home/user/detail"})
       }
-    },
-    activated() {
-      this.isShow = true
-      this.password = ''
-      this.password2 = ''
     }
   }
 </script>

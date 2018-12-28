@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
           <template slot="title">
             <label class="el-label t">基本信息</label>
@@ -112,7 +112,7 @@
 
 <script>
   import api from '@/service/api'
-  import {formatDate} from '@/util/date'
+  import {ftDate} from '@/util/format'
 
   export default {
     data() {
@@ -134,7 +134,7 @@
         maritals: []
       };
     },
-    mounted() {
+    activated() {
       api.getUserDetail({}).then((response) => {
         if (response.code == 'success') {
           this.userDetail = response.data
@@ -187,18 +187,10 @@
     },
     computed: {
       fmCreateTime() {
-        if (this.userDetail.createTime == null || this.userDetail.createTime == '')
-          return ''
-        return this.fmDate(this.userDetail.createTime)
+        return ftDate(new Date(this.userDetail.createTime), 'yyyy-MM-dd hh:mm:ss')
       }
     },
     methods: {
-      handleChange(val) {
-        // console.log(val);
-      },
-      fmDate(time) {
-        return formatDate(new Date(time), 'yyyy-MM-dd hh:mm:ss')
-      },
       onSubmit() {
         var params = {}
         params.alias = this.alias
@@ -210,7 +202,6 @@
         params.marital = this.marital
         params.domicile = this.domicile
         params.brief = this.brief
-        console.log(params)
         api.userUpdate(params).then((response) => {
           if (response.code == 'success') {
             this.$message.success("个人信息修改成功")
@@ -235,7 +226,7 @@
     margin-top: 1.5%;
   }
   .el-collapse {
-    padding: 1% 18% 0 18%;
+    padding: 1% 15% 0 15%;
     width: 100%;
     border-bottom: none;
   }

@@ -22,8 +22,8 @@
       <el-table :data="tableData.filter(data => !search || data.whiteValue.toLowerCase().includes(search.toLowerCase()))" >
         <el-table-column width	="100px" label="用户ID" prop="userId" :formatter="ftUserId"></el-table-column>
         <el-table-column width	="240px" label="操作服务" prop="optUrl"></el-table-column>
-        <el-table-column width	="200px" label="操作时间" prop="optTime" :formatter="ftOptTime"></el-table-column>
-        <el-table-column width	="100px" label="状态" prop="optStatus" :formatter="ftOptStatus"></el-table-column>
+        <el-table-column width	="160px" label="操作时间" prop="optTime" :formatter="ftOptTime"></el-table-column>
+        <el-table-column width	="80px" label="状态" prop="optStatus" :formatter="ftOptStatus"></el-table-column>
         <el-table-column width	="100px" label="操作人IP" prop="optIp"></el-table-column>
         <el-table-column min-width	="250px" label="操作内容" prop="optContent"></el-table-column>
       </el-table>
@@ -44,7 +44,7 @@
 
 <script>
   import api from '@/service/api'
-  import {formatDate} from '@/util/date'
+  import {ftDate} from '@/util/format'
 
   export default {
     mounted() {
@@ -128,7 +128,7 @@
 
 <style scoped>
   .el-container {
-    padding: 1% 10% 0 10% !important;
+    padding: 3px 3% 0 3% !important;
     width: 100%;
   }
   .el-table {

@@ -3,11 +3,10 @@
     <el-menu class="el-menu"  mode="horizontal" background-color="#EEE9E9" active-text-color="#696969" :router=true @select="handleSelect">
       <el-menu-item index="/home"><img src="@/assets/home.png" class="img-nav"/><span class="home">Home</span></el-menu-item>
 
-      <el-submenu index="/home/myplace">
+      <el-submenu index="/home/myplace" disabled="true">
         <template slot="title"><span>我的工作台</span></template>
         <el-menu-item index="/home/myplace/account"><span>三方账号管理</span></el-menu-item>
-        <el-menu-item index="2-2"><span>我的请假管理</span></el-menu-item>
-        <el-menu-item index="2-3"><span>我的加班管理</span></el-menu-item>
+        <el-menu-item index="/home/myplace/material"><span>资料信息管理</span></el-menu-item>
         <el-submenu index="2-4">
           <template slot="title"><span>Dashboard</span></template>
           <el-menu-item index="2-4-1"><span>日打卡</span></el-menu-item>
@@ -33,6 +32,7 @@
         <template slot="title"><span>DEMO</span></template>
         <el-menu-item index="/home/demo/word"><span>word文件</span></el-menu-item>
         <el-menu-item index="/home/demo/vuex"><span>vuex</span></el-menu-item>
+        <el-menu-item index="/home/demo/compiler"><span>富文本编辑器</span></el-menu-item>
       </el-submenu>
 
       <el-menu-item class="nav-right exit" index="/exit"><span class="tail">退出</span></el-menu-item>

@@ -15,7 +15,7 @@
 <script>
   export default {
     data() {
-      const generateData2 = _ => {
+      const generateData2 = () => {
         const data = [];
         const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
         const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
@@ -35,6 +35,9 @@
           return item.pinyin.indexOf(query) > -1;
         }
       };
+    },
+    activated() {
+
     }
   };
 </script>

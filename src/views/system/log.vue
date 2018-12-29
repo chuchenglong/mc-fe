@@ -86,10 +86,7 @@
         }
       },
       ftOptTime(row, column, cellValue, index) {
-        if (cellValue == null || cellValue == '') {
-          return ''
-        }
-        return formatDate(new Date(cellValue), 'yyyy-MM-dd hh:mm:ss')
+        return ftDate(new Date(cellValue), 'yyyy-MM-dd hh:mm:ss')
       },
       ftUserId(row, column, cellValue, index) {
         if (cellValue == 0) {

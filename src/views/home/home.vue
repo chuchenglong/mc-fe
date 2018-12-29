@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="carousel-div">
+      公告、快捷入口、新闻、博客、最近访问、常见问题解答、操作记录
       <template>
         <el-carousel style="height: 400px; width:800px" indicator-position="outside">
           <el-carousel-item style="height: inherit; width: inherit" v-for="item in imgs" :key="item">

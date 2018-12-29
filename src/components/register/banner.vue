@@ -35,10 +35,11 @@
     color: #e22;
     font-weight: bold;
     font-size: 16px;
-  }
-  .el-button {
     padding: 0;
     margin-top: 6px;
     margin-left: 5px;
+  }
+  .el-button {
+
   }
 </style>

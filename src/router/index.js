@@ -4,17 +4,18 @@ import Login from '@/views/login'
 import Register from '@/views/register'
 import Index from '@/views/index'
 import Home from '@/views/home/home'
+
 import UserDetail from '@/views/user/detail'
 import UserUpdate from '@/views/user/update'
 import UserPassword from '@/views/user/password'
+
 import Whitelist from '@/views/system/whitelist'
 import Config from '@/views/system/config'
 import Server from '@/views/system/server'
 import Log from '@/views/system/log'
 import UserPageList from '@/views/system/user'
 import Role from '@/views/system/role'
-import Word from '@/views/demo/word'
-import Vuex from '@/views/demo/vuex'
+
 import AccountIndex from '@/views/myplace/account/index'
 import AccountOutsideList from '@/views/myplace/account/outside/list'
 import AccountOutsideAdd from '@/views/myplace/account/outside/add'
@@ -23,6 +24,9 @@ import AccountCompanyAdd from '@/views/myplace/account/company/add'
 import AccountProductList from '@/views/myplace/account/product/list'
 import AccountProductAdd from '@/views/myplace/account/product/add'
 
+import Word from '@/views/demo/word'
+import Vuex from '@/views/demo/vuex'
+import Compiler from '@/views/demo/compiler'
 
 Vue.use(Router)
 
@@ -69,7 +73,8 @@ export default new Router({
             {path: '/home/myplace/account/product/add', name: '添加产品', component: AccountProductAdd, menuShow: true, meta:{requireAuth: true }},
           ]},
         {path: '/home/demo/word', name: 'word上传', component: Word, menuShow: true, meta:{requireAuth: true }},
-        {path: '/home/demo/vuex', name: 'vuex', component: Vuex, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/demo/vuex', name: 'vuex示例', component: Vuex, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/demo/compiler', name: '富文本编译器', component: Compiler, menuShow: true, meta:{requireAuth: true }},
       ]
     }
   ]

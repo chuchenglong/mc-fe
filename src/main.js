@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import cookie from 'vue-cookie'
 import Axios from './util/axios'
-import store from './store/store'
+import store from './store/index'
 
 import '../static/UE/ueditor.config.js'
 import '../static/UE/ueditor.all.min.js'

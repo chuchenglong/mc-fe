@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-container style="height: 500px; border: 1px solid #eee">
-      <el-aside width="200px" >
-        <el-menu style="height: 100%" :router=true default-active="/home/myplace/account/outside/list" >
+    <el-container >
+      <el-aside width="200px;" >
+        <el-menu style="height: 99%;border-bottom: 1px solid #eee;" :router=true default-active="/home/myplace/account/outside/list" >
           <el-menu-item index="/home/myplace/account/outside/list">
             <i class="el-icon-tickets"></i>
             <span slot="title">三方账号列表</span>

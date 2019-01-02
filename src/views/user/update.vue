@@ -7,8 +7,7 @@
             <label class="el-label t">基本信息</label>
           </template>
           <div style="position: absolute;margin-top: 8px;">
-            <img :src="userDetail.photo" v-if="userDetail.photo" class="img-user"/>
-            <img src="@/assets/user-photo.png" v-else class="img-user"/>
+            <Upload :photo="userDetail.photo"/>
           </div>
           <el-form class="el-form-p">
             <el-form-item>
@@ -113,8 +112,10 @@
 <script>
   import api from '@/service/api'
   import {ftDate} from '@/util/format'
+  import Upload from '@/components/user/upload'
 
   export default {
+    components: {Upload},
     data() {
       return {
         activeNames: ['1','2','3','4'],
@@ -147,6 +148,7 @@
           this.marital = response.data.marital
           this.domicile = response.data.domicile
           this.brief = response.data.brief
+          this.$store.dispatch("SetPhoto", response.data.photo)
         } else {
           this.$message.error(response.message)
         }
@@ -202,6 +204,7 @@
         params.marital = this.marital
         params.domicile = this.domicile
         params.brief = this.brief
+        params.photo = this.$store.state.user.photo
         api.userUpdate(params).then((response) => {
           if (response.code == 'success') {
             this.$message.success("个人信息修改成功")

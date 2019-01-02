@@ -7,17 +7,23 @@
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :before-upload="beforeAvatarUpload">
-      <img v-if="$store.state.user.photo" :src="$store.state.user.photo" class="avatar">
-      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      <img v-show="isInputShow" :src="photo" class="avatar">
+      <img v-show="isShow" :src="imageUrl" class="avatar">
+      <i v-show="isDefaultShow" class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      photo: String
+    },
     data() {
       return {
         actionUrl: '/api/file/uploadSingleUserImage',
+        imageUrl: '',
+        isShow: false
       }
     },
     computed: {
@@ -26,6 +32,16 @@
           token: this.$cookie.get("token")
         }
       },
+      isDefaultShow() {
+        if (this.photo || this.isShow)
+          return false
+        return true
+      },
+      isInputShow() {
+        if (this.photo== null || this.photo == '' || this.isShow)
+          return false
+        return true
+      }
     },
     methods: {
       beforeAvatarUpload(file) {
@@ -42,8 +58,10 @@
       },
       handleAvatarSuccess(res, file) {
         if (res.code == 'success') {
-          // this.imageUrl = URL.createObjectURL(file.raw)
-          this.$store.dispatch("SetPhoto", res.data)
+          this.imageUrl = URL.createObjectURL(file.raw)
+          this.isShow = true
+          this.$emit("getPhotoUrlEvent", res.data)
+          console.log("step 3.1="+res.data)
         } else {
           this.$message.error(res.message)
         }

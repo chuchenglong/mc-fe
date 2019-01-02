@@ -3,7 +3,7 @@
     <el-menu class="el-menu"  mode="horizontal" background-color="#EEE9E9" active-text-color="#696969" :router=true @select="handleSelect">
       <el-menu-item index="/home"><img src="@/assets/home.png" class="img-nav"/><span class="home">Home</span></el-menu-item>
 
-      <el-submenu index="/home/myplace" disabled="true">
+      <el-submenu index="/home/myplace">
         <template slot="title"><span>我的工作台</span></template>
         <el-menu-item index="/home/myplace/account"><span>三方账号管理</span></el-menu-item>
         <el-menu-item index="/home/myplace/material"><span>资料信息管理</span></el-menu-item>
@@ -33,12 +33,13 @@
         <el-menu-item index="/home/demo/word"><span>word文件</span></el-menu-item>
         <el-menu-item index="/home/demo/vuex"><span>vuex</span></el-menu-item>
         <el-menu-item index="/home/demo/compiler"><span>富文本编辑器</span></el-menu-item>
+        <el-menu-item index="/home/demo/upload"><span>阿里云OSS</span></el-menu-item>
       </el-submenu>
 
       <el-menu-item class="nav-right exit" index="/exit"><span class="tail">退出</span></el-menu-item>
       <el-submenu class="nav-right setup" index="/home/secret">
         <template slot="title">
-          <img :src="photo" v-if="photo" class="img-photo"/>
+          <img :src="$store.state.user.photo" v-if="$store.state.user.photo" class="img-photo"/>
           <img src="@/assets/user-photo.png" v-else class="img-photo"/>
           <span class="tail">{{alias}}</span>
         </template>
@@ -58,7 +59,7 @@
       api.getHomeData({}).then((response) => {
         if (response.code == 'success') {
           this.alias = response.data.alias
-          this.photo = response.data.photo
+          this.$store.dispatch("SetPhoto", response.data.photo)
         } else {
           this.$message.error(response.message)
         }

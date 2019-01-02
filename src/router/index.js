@@ -27,6 +27,7 @@ import AccountProductAdd from '@/views/myplace/account/product/add'
 import Word from '@/views/demo/word'
 import Vuex from '@/views/demo/vuex'
 import Compiler from '@/views/demo/compiler'
+import Upload from '@/views/demo/upload'
 
 Vue.use(Router)
 
@@ -75,6 +76,7 @@ export default new Router({
         {path: '/home/demo/word', name: 'word上传', component: Word, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/demo/vuex', name: 'vuex示例', component: Vuex, menuShow: true, meta:{requireAuth: true }},
         {path: '/home/demo/compiler', name: '富文本编译器', component: Compiler, menuShow: true, meta:{requireAuth: true }},
+        {path: '/home/demo/upload', name: '阿里云上传', component: Upload, menuShow: true, meta:{requireAuth: true }},
       ]
     }
   ]
